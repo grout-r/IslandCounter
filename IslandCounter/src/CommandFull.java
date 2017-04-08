@@ -10,5 +10,6 @@ public class CommandFull
     }
     public Command command;
     public Size size;
+    public int setSize;
     public int id;
 }

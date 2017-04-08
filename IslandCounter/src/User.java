@@ -18,8 +18,7 @@ public class User
 
     private CommandFull parseArgumentGenerate(Scanner stdin)
     {
-        int sizex;
-        int sizey;
+
         CommandFull retval = new CommandFull();
 
         if (!stdin.hasNextInt())
@@ -27,24 +26,30 @@ public class User
             System.out.println("Bad arguments");
             return null;
         }
-        sizex = stdin.nextInt();
-        if (!stdin.hasNextInt())
+        retval.size.x = stdin.nextInt();
 
+        if (!stdin.hasNextInt())
         {
             System.out.println("Bad arguments");
             return null;
         }
-        sizey = stdin.nextInt();
+        retval.size.y = stdin.nextInt();
+
+        if (!stdin.hasNextInt())
+        {
+            System.out.println("Bad arguments");
+            return null;
+        }
+        retval.setSize = stdin.nextInt();
+
         retval.command = Command.generateSet;
-        retval.size.x = sizex;
-        retval.size.y = sizey;
         return  retval;
     }
 
     private CommandFull parseArgumentDisplay(Scanner stdin)
     {
         CommandFull retval = new CommandFull();
-        retval.command = Command.generateSet;
+        retval.command = Command.displaySet;
         return  retval;
     }
 
@@ -75,7 +80,7 @@ public class User
         CommandFull retval = null;
 
         System.out.println("\nUsage : You can enter command\n" +
-                "generateSet sizeX sizeY\n" +
+                "generateSet sizeX sizeY setSize\n" +
                 "displaySet\n" +
                 "deletetSet\n" +
                 "countIsland ID\n");
