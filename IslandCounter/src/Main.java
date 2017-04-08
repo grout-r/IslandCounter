@@ -26,6 +26,7 @@ public class Main
                 case deleteSet:
                     break;
                 case countIsland:
+                    set.countIsland(command.id);
                     break;
             }
 

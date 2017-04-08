@@ -35,10 +35,9 @@ public class User
         }
         retval.size.y = stdin.nextInt();
 
-        if (!stdin.hasNextInt())
+        if (stdin.hasNextInt())
         {
-            System.out.println("Bad arguments");
-            return null;
+            retval.setSize = stdin.nextInt();
         }
         retval.setSize = stdin.nextInt();
 

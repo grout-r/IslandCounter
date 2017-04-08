@@ -29,5 +29,11 @@ public class MapSet
         }
     }
 
+    public void countIsland(int id)
+    {
+        maps.get(id).count();
+    }
+
     ArrayList<Map> maps;
+
 }
