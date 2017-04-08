@@ -6,8 +6,13 @@ public class Main
     public static void main(String[] args)
     {
         User user = new User();
+        CommandFull command;
 
-        user.getCommand();
+        while (true)
+        {
+            command = user.getCommand();
+
+        }
     }
 
 }

@@ -16,45 +16,89 @@ public class User
         stdin = new Scanner(System.in);
     }
 
-    private void parseArgumentGenerate(Scanner wordExtractor)
+    private CommandFull parseArgumentGenerate(Scanner stdin)
     {
         int sizex;
         int sizey;
+        CommandFull retval = new CommandFull();
 
-        sizex = wordExtractor.nextInt();
-        sizey = wordExtractor.nextInt();
-        System.out.println(sizex);
-        System.out.println(sizey);
+        if (!stdin.hasNextInt())
+        {
+            System.out.println("Bad arguments");
+            return null;
+        }
+        sizex = stdin.nextInt();
+        if (!stdin.hasNextInt())
 
-//        while (wordExtractor.hasNext())
-//        {
-//
-//        }
+        {
+            System.out.println("Bad arguments");
+            return null;
+        }
+        sizey = stdin.nextInt();
+        retval.command = Command.generateSet;
+        retval.size.x = sizex;
+        retval.size.y = sizey;
+        return  retval;
     }
 
-    public CommandFull getCommand()
+    private CommandFull parseArgumentDisplay(Scanner stdin)
     {
-        String buffer = stdin.next();
-        Scanner wordExtractor = new Scanner(buffer);
-        String rawCommand = wordExtractor.next();
+        CommandFull retval = new CommandFull();
+        retval.command = Command.generateSet;
+        return  retval;
+    }
 
+    private CommandFull parseArgumentDelete(Scanner stdin)
+    {
+        CommandFull retval = new CommandFull();
+        retval.command = Command.deleteSet;
+        return  retval;
+    }
+
+    private CommandFull parseArgumentCount(Scanner stdin)
+    {
+        CommandFull retval = new CommandFull();
+
+        if (!stdin.hasNextInt())
+        {
+            System.out.println("Bad arguments");
+            return null;
+        }
+        retval.id = stdin.nextInt();
+        retval.command = Command.countIsland;
+        return  retval;
+    }
+
+    CommandFull getCommand()
+    {
+        String rawCommand;
+        CommandFull retval = null;
+
+        System.out.println("\nUsage : You can enter command\n" +
+                "generateSet sizeX sizeY\n" +
+                "displaySet\n" +
+                "deletetSet\n" +
+                "countIsland ID\n");
+        System.out.printf("$> ");
+        rawCommand = stdin.next();
         switch (rawCommand) {
             case "generateSet":
-                parseArgumentGenerate(wordExtractor);
+                retval = parseArgumentGenerate(stdin);
                 break;
             case "displaySet":
-
+                retval = parseArgumentDisplay(stdin);
                 break;
             case "deleteSet":
-
+                retval = parseArgumentDelete(stdin);
                 break;
             case "countIsland":
-
+                retval = parseArgumentCount(stdin);
                 break;
         }
 
-
-        return new CommandFull();
+        if (retval == null)
+            retval = getCommand();
+        return retval;
     }
 
     private Scanner stdin;

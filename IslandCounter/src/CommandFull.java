@@ -4,6 +4,11 @@
 
 public class CommandFull
 {
+    CommandFull()
+    {
+        size = new Size();
+    }
     public Command command;
     public Size size;
+    public int id;
 }
